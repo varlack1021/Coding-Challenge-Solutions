@@ -1,4 +1,9 @@
 from collections import Counter
+from itertools import combinations
+
+combos = combinations(range(10), 2)
+for x , y in combos:
+	print(x, y)
 arr = [1, 3, 9, 9, 27, 81]
 
 
@@ -18,6 +23,25 @@ def count_triplets(arr, r):
         print(r2)
         print(r3)
         print("_____")
+def longestPalindrome(self, s):
+    res = ""
+    for i in xrange(len(s)):
+        # odd case, like "aba"
+        tmp = self.helper(s, i, i)
+        if len(tmp) > len(res):
+            res = tmp
+        # even case, like "abba"
+        tmp = self.helper(s, i, i+1)
+        if len(tmp) > len(res):
+            res = tmp
+    return res
+ 
+# get the longest palindrome, l, r are the middle indexes   
+# from inner to outer
+def helper(self, s, l, r):
+    while l >= 0 and r < len(s) and s[l] == s[r]:
+        l -= 1; r += 1
+    return s[l+1:r]
 	
 s = "bbaacd"
 def isValid(s):
@@ -43,7 +67,7 @@ def isValid(s):
 isValid(s)
 	
 class Solution:
-    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+    def wordBreak(self, s, wordDict):
       
         if not s or not wordDict:
                 return False
@@ -66,74 +90,3 @@ class Solution:
         return False
 
 
-class Solution:
-    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-        
-        if not s or not wordDict:
-            return False
-        starting_index = 0
-        stack = [starting_index]
-        visited = set()
-        while stack:
-            starting_index = stack.pop()
-            
-            if starting_index in visited:
-                continue
-            visited.add(starting_index)
-            for word in wordDict:
-                
-                if s[starting_index:].startswith(word):
-                    x = len(word)                
-                    if x == len(s[starting_index:]):
-                        return True
-                    stack.append(starting_index + x)
-        return False
-
-class Solution:
-    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
-        x = []
-        y = []
-        while l1.next != None:
-            x.insert(0, str(l1.val))
-            l1 = l1.next
-        
-        x.insert(0, str(l1.val))
-        
-        while l2.next != None:
-            y.insert(0, str(l2.val))
-            l2 = l2.next
-        y.insert(0, str(l2.val))
-        
-        result = int("".join(x)) + int("".join(y))
-        lis = [ x for x in str(result)]
-        lis.reverse()
-        
-        
-        head = n = ListNode(lis.pop(0))
-        
-        for data in lis:
-            node = ListNode(data)
-            n.next = node
-            n = node
-        
-        
-        
-        print(result)
-        return head
-class Solution:
-    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
-        head = node = ListNode(0)
-        carry = 0
-        while l1 or l2 or carry:
-            val1 = (l1.val if l1 else 0)
-            val2 = (l2.val if l2 else 0)
-            
-            carry, output = divmod(val1 + val2 + carry, 10)
-            
-            tempNode = ListNode(output)
-            node.next = tempNode
-            node = tempNode
-            
-            l1 = (l1.next if l1 else 0)
-            l2 = (l2.next if l2 else 0)
-        return head.next
