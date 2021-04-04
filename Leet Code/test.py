@@ -7,9 +7,9 @@ if not x and x != 0:
 matrix = [[0 for x in range(3)] for y in range(3)]
 print(matrix)
 
-for x in matrix:
-    if 0 in x:
-        x[0]= "-"
-print(matrix)
-lis = [0]*4
-print(lis)
+y = 3
+x = 2
+while x < y:
+	print(y)
+	y += 1
+	x +=1
