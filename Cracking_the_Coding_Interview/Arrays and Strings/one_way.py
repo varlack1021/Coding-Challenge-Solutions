@@ -5,22 +5,65 @@ one edit (or zero edits) away.
 
 Two Pointer Solution
 '''
+def insert(s1,  s2):
+	diffs = 0
+	j = 0
+	
+	for i in range(len(s2)):
+
+		if s1[i+j] != s2[i]:
+			diffs += 1
+			j+= 1
+			if diffs > 1:
+				return False
+
+	return True
 
 def one_away(s1, s2):
 	if s1 == s2:
 		return True
 
-	if len(s1) - len(s2) > 1:
+	if abs(len(s1) - len(s2)) > 1:
 		return False
 
-	diffs = 0
-	l = max(len(s1), len(s2))
+	diff = 0
 
-	for i in range(l):
-		if s1[i] != s2[i]:
-			
+	if len(s1) == len(s2):
+		insert(s1, s2)
+	
+	if len(s1) > len(s2):
+		return insert(s1, s2)
+	if len(s2) > len(s1):
+		return insert(s2, s1)
 
-	return True if diffs > 1 else False
+	return True
 
-s1 = pale
-s2 = ple
+
+s1 = 'pale'
+s2 = 'pale'
+print(one_away(s1, s2))
+
+s1 = 'pale'
+s2 = 'patient'
+print(one_away(s1, s2))
+
+
+s1 = ''
+s2 = 'patient'
+print(one_away(s1, s2))
+
+s1 = 'pale'
+s2 = ''
+print(one_away(s1, s2))
+
+s1 = 'pale'
+s2 = 'ple'
+print(one_away(s1, s2))
+
+s1 = 'pale'
+s2 = 'pla'
+print(one_away(s1, s2))
+
+s1 = 'pale'
+s2 = 'pal'
+print(one_away(s1, s2))
