@@ -1,4 +1,4 @@
-import time
+ import time
 class node(object):
 
 	def __init__(self, node=None, data=None):
